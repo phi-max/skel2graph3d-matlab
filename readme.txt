@@ -2,7 +2,7 @@ Skel2Graph3D: calculate the network graph of a 3D skeleton
 
 This function converts a 3D binary voxel skeleton into a network graph described by nodes and edges.
 
-The input is a 3D binary image containing a one-dimensional voxel skeleton, generated e.g. using the "Skeleton3D" thinning function available on MFEX. The output is the adjacency matrix of the graph, and the nodes and links of the network as MATLAB structure. 
+The input is a 3D binary image containing a one-dimensional voxel skeleton, generated e.g. using the "Skeleton3D" thinning function available on MFEX. The output is the adjacency matrix of the graph, and the nodes and links of the network as MATLAB structure.
 
 Usage:
 
@@ -10,14 +10,14 @@ Usage:
 
 where "skel" is the input 3D binary image, and "THR" is a threshold for the minimum length of branches, to filter out skeletonization artifacts.
 
-A is the adjacency matrix, and node/link are the structures describing node and link properties.
+A is the adjacency matrix with the length of the links as matrix entries, and node/link are the structures describing node and link properties.
 
 A node has the following properties:
 
 - idx             List of voxel indices of this node
 - links           List of links connected to this node
 - conn            List of destinations of links of this node
-- comX,comY,comZ  Center of mass of all voxels of this node 
+- comX,comY,comZ  Center of mass of all voxels of this node
 - ep              1 if node is endpoint (degree 1), 0 otherwise
 
 A link has the following properties:
