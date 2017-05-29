@@ -108,10 +108,10 @@ end;
 l_idx = 1;
 
 c2n=zeros(w*l*h,1);
-c2n(cans(:,1))=1:size(cans, 1);
+c2n(cans(:,1))=1:size(cans,1);
 
 s2n=zeros(w*l*h,1);
-s2n(nhi(:,14))=1:size(nhi, 1);
+s2n(nhi(:,14))=1:size(nhi,1);
 
 % visit all nodes
 for i=1:num_realnodes
