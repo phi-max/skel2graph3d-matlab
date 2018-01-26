@@ -124,12 +124,16 @@ for i=1:num_realnodes
         
         % all potential unvisited links emanating from this voxel
         link_cands = nhi(link_idx(j),nh(link_idx(j),:)==1);
-        link_cands = link_cands(skel2(link_cands)==1);
+        
+	% short branches that only have an endpoint
+        ep_cands = intersect(link_cands,ep);
+
+	link_cands = intersect(link_cands,cans(:,1));
         
         for k=1:length(link_cands)
-            [vox,n_idx,ep] = pk_follow_link(skel2,node,i,j,link_cands(k),cans,c2n);
+            [vox,n_idx,ept] = pk_follow_link(skel2,node,i,j,link_cands(k),cans,c2n);
             skel2(vox(2:end-1))=0;
-            if((ep && length(vox)>THR) || (~ep && i~=n_idx))
+            if((ept && length(vox)>THR) || (~ept && i~=n_idx))
                 link(l_idx).n1 = i;
                 link(l_idx).n2 = n_idx; % node number
                 link(l_idx).point = vox;
@@ -140,6 +144,24 @@ for i=1:num_realnodes
                 l_idx = l_idx + 1;
             end;
         end;
+
+        if (THR==0) % if short branches allowed
+            for k=1:length(ep_cands)
+                n_idx = skel2(ep_cands(k))-1;
+                if(n_idx)
+                    skel2(ep_cands(k))=0;
+                    link(l_idx).n1 = i;
+                    link(l_idx).n2 = n_idx; % node number
+                    link(l_idx).point = ep_cands(k);
+                    node(i).links = [node(i).links, l_idx];
+                    node(i).conn = [int16(node(i).conn), int16(n_idx)];
+                    node(n_idx).links = [node(n_idx).links, l_idx];
+                    node(n_idx).conn = [int16(node(n_idx).conn), int16(i)];
+                    l_idx = l_idx + 1;
+                end;
+            end;
+        end;
+
     end;
         
 end;
