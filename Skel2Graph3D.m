@@ -123,7 +123,7 @@ for i=1:length(node)
         % visit all voxels of this node
         
         % all potential unvisited links emanating from this voxel
-        link_cands = nhi(link_idx(j),nh(link_idx(j),:)==1);
+        link_cands = nhi(link_idx(j),nh(link_idx(j),[1:13,15:27])==1);
         
 	% short branches that only have an endpoint
         ep_cands = intersect(link_cands,ep);
