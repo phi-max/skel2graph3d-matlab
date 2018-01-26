@@ -129,11 +129,12 @@ for i=1:length(node)
         % visit all voxels of this node
         
         % all potential unvisited links emanating from this voxel
-        link_cands = nhi(link_idx(j),nh(link_idx(j),[1:13,15:27])==1);
+        link_cands = nhi(link_idx(j),nh(link_idx(j),:)==1);
         
 	% short branches that only have an endpoint
         ep_cands = intersect(link_cands,ep);
 
+        link_cands = link_cands(skel2(link_cands)==1);
 	link_cands = intersect(link_cands,cans(:,1));
         
         for k=1:length(link_cands)
@@ -155,7 +156,7 @@ for i=1:length(node)
         if (THR==0) % if short branches allowed
             for k=1:length(ep_cands)
                 n_idx = skel2(ep_cands(k))-1;
-                if(n_idx)
+                if(n_idx && n_idx~=i)
                     skel2(ep_cands(k))=0;
                     link(l_idx).n1 = i;
                     link(l_idx).n2 = n_idx; % node number
