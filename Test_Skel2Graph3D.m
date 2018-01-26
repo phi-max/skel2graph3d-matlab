@@ -47,12 +47,12 @@ for i=1:length(node2)
     end;
     
     for j=1:length(node2(i).links)    % draw all connections of each node
-        if(node2(link2(node2(i).links(j)).n2).ep==1)
-            col='k'; % branches are blue
+        if(node2(node2(i).conn(j)).ep==1)
+            col='k'; % branches are black
         else
             col='k'; % links are red
         end;
-        if(node2(link2(i).n1).ep==1)
+        if(node2(i).ep==1)
             col='k';
         end;
 
