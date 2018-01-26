@@ -15,6 +15,10 @@ function [A,node,link] = Skel2Graph3D(skel,THR)
 % pad volume with zeros
 skel=padarray(skel,[1 1 1]);
 
+% create label matrix for different skeletons
+cc_skel=bwconncomp(skel);
+lm=labelmatrix(cc_skel);
+
 % image dimensions
 w=size(skel,1);
 l=size(skel,2);
@@ -80,7 +84,8 @@ for i=1:cc2.NumObjects
     node(i).comy = mean(y);
     node(i).comz = mean(z);
     node(i).ep = 0;
-    
+    node(i).label = lm(node(i).idx(1));
+   
     % assign index to node voxels
     skel2(node(i).idx) = i+1;
 end;
@@ -100,7 +105,8 @@ for i=1:cc3.NumObjects
     node(ni).comy = mean(y);
     node(ni).comz = mean(z);
     node(ni).ep = 1;
-    
+    node(ni).label = lm(node(ni).idx(1));
+
     % assign index to node voxels
     skel2(node(ni).idx) = ni+1;
 end;
@@ -137,7 +143,8 @@ for i=1:length(node)
                 link(l_idx).n1 = i;
                 link(l_idx).n2 = n_idx; % node number
                 link(l_idx).point = vox;
-                node(i).links = [node(i).links, l_idx];
+                link(l_idx).label = lm(vox(1));
+		node(i).links = [node(i).links, l_idx];
                 node(i).conn = [int16(node(i).conn), int16(n_idx)];
                 node(n_idx).links = [node(n_idx).links, l_idx];
                 node(n_idx).conn = [int16(node(n_idx).conn), int16(i)];
@@ -153,6 +160,7 @@ for i=1:length(node)
                     link(l_idx).n1 = i;
                     link(l_idx).n2 = n_idx; % node number
                     link(l_idx).point = ep_cands(k);
+                    link(l_idx).label = lm(ep_cands(k));
                     node(i).links = [node(i).links, l_idx];
                     node(i).conn = [int16(node(i).conn), int16(n_idx)];
                     node(n_idx).links = [node(n_idx).links, l_idx];
