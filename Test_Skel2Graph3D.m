@@ -50,7 +50,7 @@ for i=1:length(node2)
         if(node2(node2(i).conn(j)).ep==1)
             col='k'; % branches are black
         else
-            col='k'; % links are red
+            col='r'; % links are red
         end;
         if(node2(i).ep==1)
             col='k';
