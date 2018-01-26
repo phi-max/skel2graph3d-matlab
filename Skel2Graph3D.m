@@ -114,7 +114,7 @@ s2n=zeros(w*l*h,1);
 s2n(nhi(:,14))=1:size(nhi,1);
 
 % visit all nodes
-for i=1:num_realnodes
+for i=1:length(node)
 
     % find all canal vox in nb of all node idx
     link_idx = s2n(node(i).idx);
