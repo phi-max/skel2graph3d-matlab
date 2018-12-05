@@ -30,11 +30,11 @@ A second function, "Graph2Skel3D.m", converts the network graph back into a clea
 
 An example of how to use these functions is given in the script "Test_Skel2Graph3D.m", including a test image. In this example, it is also demonstrated how to iteratively combine both conversion functions in order to obtain a completely cleaned skeleton graph.
 
-Any comments, corrections or suggestions are highly welcome. If you include this in your own work, please cite our original publicaton [1].
+Any comments, corrections or suggestions are highly welcome. If you include this in your own work, please cite our publicaton [1].
 
 Philip Kollmannsberger 09/2013, 01/2016
 philipk@gmx.net
 
-[1] Kerschnitzki, Kollmannsberger et al.,
-"Architecture of the osteocyte network correlates with bone material quality."
-Journal of Bone and Mineral Research, 28(8):1837-1845, 2013.
+[1] Kollmannsberger, Kerschnitzki et al.,
+"The small world of osteocytes: connectomics of the lacuno-canalicular network in bone."
+New Journal of Physics 19:073019, 2017.
